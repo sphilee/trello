@@ -7,6 +7,12 @@ html, body, #root, #root>div {
   height: 100%
 }
 
+#root{
+  background-image: url('imgs/background.jpg');
+  background-size: cover;
+  padding-top: 60px; /* 헤더 높이 */
+}
+
 body {
   margin: 0;
   padding: 0;
