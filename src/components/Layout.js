@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { media } from 'lib/style-utils';
+import background from 'imgs/background.jpg';
 
 const Wrapper = styled.div`
+    background-image: url(${background});
+    background-size: cover;
+    padding-top: 60px; /* 헤더 높이 */
 `;
 
 const Layout = ({children}) => (
@@ -18,20 +21,6 @@ Layout.Main = styled.div`
     width: 1200px;
     transition: all .3s;
     position: relative;
-
-    ${media.desktop`
-        width: 990px;
-    `}
-
-    ${media.tablet`
-        margin-top: 1rem;
-        width: calc(100% - 2rem);
-    `}
-
-    ${media.mobile`
-        margin-top: 0.5rem;
-        width: calc(100% - 1rem);        
-    `}
 
 `
 

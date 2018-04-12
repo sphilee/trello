@@ -7,7 +7,6 @@ const Wrapper = styled.div`
     width: 270px;
     margin: 0 5px;
     height: 100%;
-    display: inline-block;
     vertical-align: top;
     cursor : pointer;
 `;

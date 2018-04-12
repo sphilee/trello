@@ -8,22 +8,26 @@ import * as listActions from 'modules/list';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+
 class App extends Component {
     async componentDidMount() {
-        const { ListActions } = this.props;
-        
+        const {ListActions} = this.props;
+
         await ListActions.getInitialList();
     }
-
 
     render() {
         return (
             <Layout>
                 <Header/>
-                <Layout.Main>
-                    <ListContainer/>
-                    <WriteList/>
-                </Layout.Main>
+                <PerfectScrollbar>
+                    <Layout.Main>
+                        <ListContainer/>
+                        <WriteList/>
+                    </Layout.Main>
+                </PerfectScrollbar>
             </Layout>
         );
     }
