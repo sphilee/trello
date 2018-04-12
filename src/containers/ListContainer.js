@@ -12,9 +12,7 @@ class ListContainer extends Component {
 }
 
 export default connect((state) => ({
-    lists: state
-        .list
-        .get('data')
+    lists: state.list.get('data')
 }), (dispatch) => ({
     ListActions: bindActionCreators(listActions, dispatch)
 }))(ListContainer);

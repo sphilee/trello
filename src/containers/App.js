@@ -12,20 +12,35 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this._scrollBarRef = React.createRef();
+        this.listWidth = 270;
+    }
+
     async componentDidMount() {
         const {ListActions} = this.props;
 
         await ListActions.getInitialList();
     }
 
+    updateScroll() {
+        // Explicitly focus the text input using the raw DOM API
+        // Note: we're accessing "current" to get the DOM node
+        const {listSize} = this.props;
+        const scrollbar = this._scrollBarRef.current;
+        scrollbar.updateScroll();
+        scrollbar._container.scrollLeft = this.listWidth * listSize;
+      }
+
     render() {
         return (
             <Layout>
                 <Header/>
-                <PerfectScrollbar>
+                <PerfectScrollbar ref={this._scrollBarRef}>
                     <Layout.Main>
                         <ListContainer/>
-                        <WriteList/>
+                        <WriteList updateScroll= {this.updateScroll.bind(this)}/>
                     </Layout.Main>
                 </PerfectScrollbar>
             </Layout>
@@ -33,6 +48,8 @@ class App extends Component {
     }
 }
 
-export default connect((state) => ({}), (dispatch) => ({
+export default connect((state) => ({
+    listSize: state.list.get('data').size - 1
+}),(dispatch) => ({
     ListActions: bindActionCreators(listActions, dispatch)
 }))(App);

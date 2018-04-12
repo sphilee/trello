@@ -8,6 +8,11 @@ import * as uiActions from 'modules/ui';
 import * as listActions from 'modules/list';
 
 class WriteList extends Component {
+    componentDidUpdate() {
+        const {updateScroll} = this.props;
+        updateScroll();
+    }
+
     handleFocus = () => {
         const {focused, UIActions} = this.props;
 
