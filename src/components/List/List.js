@@ -2,16 +2,14 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import enhanceWithClickOutside from 'react-click-outside';
+
+import {InputSet} from 'components/Shared';
 
 const Wrapper = styled.div`
     width: 270px;
     margin: 0 5px;
-    height: 100%;
-    vertical-align: top;
     cursor : pointer;
-`;
-
-const Content = styled.div`
     background: #e2e4e6;
     border-radius: 3px;
     display: flex;
@@ -22,10 +20,16 @@ const Content = styled.div`
 
 const Header = styled.div`
     display: flex;
-    padding-right: 34px;
-    padding: 8px 10px;
-    position: relative;
-    min-height: 18px;
+    padding-left: 10px;
+    align-items: center;
+    height: 34px;
+`;
+
+const TitleWrapper = styled.div`
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
 `;
 
 const Title = styled.div`
@@ -38,9 +42,9 @@ const Title = styled.div`
 `;
 
 const Option = styled.div`
-    position: absolute;
-    right: 4px;
-    top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #999;
     font-size: 12px;
     font-family: trellicons;
@@ -48,10 +52,6 @@ const Option = styled.div`
     height: 26px;
 
     &:before {
-        position: absolute;
-        top: 5px;
-        left: 50%;
-        margin-left: -5px;
         content: "\\E944";
     }
 
@@ -82,40 +82,68 @@ class List extends Component {
             id: PropTypes.number,
             title: PropTypes.string
         }),
-        onDelete: PropTypes.func 
+        onDelete: PropTypes.func,
+        onUpdate: PropTypes.func
     }
 
-    handleClick = () => {
+    componentDidMount(){
+        const { title } = this.props.list.toJS();
+        this.setState({title});
+    }
+
+    state = {
+        title: '',
+        focused : false
+    };
+
+    handleDelete = () => {
         const { id } = this.props.list.toJS();
         const { onDelete } = this.props;
         onDelete(id);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.list !== this.props.list;
+    handleFocus = () => {
+        this.setState({focused : true});
+    }
+
+    handleChange = (e) => {
+        const { value } = e.target;
+        this.setState({title : value});
+    }
+
+    handleClickOutside() {
+        const { id } = this.props.list.toJS();
+        const { onUpdate } = this.props;
+        const { title } = this.state;
+        onUpdate({id, list: { title }});
+        this.setState({focused : false});
     }
     
     render() {
-        const { title } = this.props.list.toJS();
-        const { handleClick } = this;
-
+        const { focused, title } = this.state;
+        const { handleDelete, handleChange, handleFocus } = this;
         return (
             <Wrapper>
-                <Content>
-                    <Header>
-                        <Title>
-                            {title}
-                        </Title>
-                        <Option onClick={handleClick}/>
-                    </Header>
-                    <Card>
-                        Add a card...
-                    </Card>
-                </Content>
+                <Header>
+                    {focused
+                        ? <TitleWrapper>
+                                <InputSet modify onChange={handleChange} title={title}/>
+                            </TitleWrapper>
+                        : <TitleWrapper onClick={handleFocus}>
+                            <Title>
+                                {title}
+                            </Title>
+                        </TitleWrapper>}
+                    <Option onClick={handleDelete}/>
+                </Header>
+                <Card>
+                    Add a card...
+                </Card>
             </Wrapper>
 
         )
     }
 }
 
-export default List;
+
+export default enhanceWithClickOutside(List);

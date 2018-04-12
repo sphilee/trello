@@ -5,13 +5,12 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import List from './List';
 
-
 const Wrapper = styled.div `
     display: flex;
 `;
 
-const Lists = ({lists, onDelete}) => {
-    const Lists = lists.map(list => (<List key={list.get('id')} list={list} onDelete={onDelete}/>));
+const Lists = ({lists, onDelete, onUpdate}) => {
+    const Lists = lists.map(list => (<List key={list.get('id')} list={list} onUpdate={onUpdate} onDelete={onDelete}/>));
     return (
         <Wrapper>
             {Lists}
@@ -21,7 +20,9 @@ const Lists = ({lists, onDelete}) => {
 
 Lists.propTypes = {
     lists: ImmutablePropTypes.listOf(ImmutablePropTypes.mapContains({id: PropTypes.number, title: PropTypes.string})),
-    onDelete: PropTypes.func 
+    onDelete: PropTypes.func,
+    onUpdate: PropTypes.func
+
 }
 
 export default Lists;

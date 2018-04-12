@@ -7,7 +7,7 @@ import Lists from 'components/List';
 class ListContainer extends Component {
     render() {
         const {lists, ListActions} = this.props;
-        return (<Lists lists={lists} onDelete={ListActions.deleteList}/>);
+        return (<Lists lists={lists} onUpdate={ListActions.updateList} onDelete={ListActions.deleteList}/>);
     }
 }
 
