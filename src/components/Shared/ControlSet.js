@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Save from './SaveButton';
-import Cancel from './CancelButton';
+import {SaveButton, CancelButton} from './';
 
 const Wrapper = styled.div `
     height : 32px;
@@ -12,8 +11,8 @@ const Wrapper = styled.div `
 
 const ControlSet = ({onCreate, onCancel}) => (
     <Wrapper>
-        <Save onCreate={onCreate}/>
-        <Cancel onCancel={onCancel}/>
+        <SaveButton onCreate={onCreate}/>
+        <CancelButton onCancel={onCancel}/>
     </Wrapper>
 );
 

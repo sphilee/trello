@@ -11,7 +11,6 @@ const DeleteButton = styled.div`
     font-family: trellicons;
     width: 27px;
     height: 26px;
-    margin-right: 3px;
 
     &:before {
         content: "\\E944";
