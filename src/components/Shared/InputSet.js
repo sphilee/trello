@@ -34,6 +34,7 @@ class InputSet extends Component {
 
     componentDidMount() {
         this.title.focus();
+        this.title.select();
     }
 
     render() {
