@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 
 import {Option, Card, Title} from 'components/Shared';
 
@@ -25,10 +24,6 @@ const Header = styled.div`
 
 class List extends Component {
     static propTypes = {
-        list: ImmutablePropTypes.mapContains({
-            id: PropTypes.number,
-            title: PropTypes.string
-        }),
         onDelete: PropTypes.func,
         onUpdate: PropTypes.func
     }
