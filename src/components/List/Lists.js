@@ -7,6 +7,7 @@ import List from './List';
 
 const Wrapper = styled.div `
     display: flex;
+    align-items: flex-start;
 `;
 
 const Lists = ({lists, onDelete, onUpdate}) => {

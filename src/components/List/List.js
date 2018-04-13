@@ -9,9 +9,6 @@ const Wrapper = styled.div`
     width: 270px;
     margin: 0 5px;
     cursor : pointer;
-`;
-
-const Content = styled.div`
     background: #e2e4e6;
     border-radius: 3px;
     display: flex;
@@ -47,13 +44,11 @@ class List extends Component {
         const { handleDelete } = this;
         return (
             <Wrapper> 
-                <Content>
-                    <Header>
-                        <Title list={list} onUpdate={onUpdate}/>
-                        <Option handleDelete={handleDelete}/>
-                    </Header>
-                    <Card />
-                </Content>
+                <Header>
+                    <Title list={list} onUpdate={onUpdate}/>
+                    <Option handleDelete={handleDelete}/>
+                </Header>
+                <Card />
             </Wrapper> 
         )
     }
