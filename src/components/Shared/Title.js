@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import ImmutablePropTypes from 'react-immutable-proptypes';
 import enhanceWithClickOutside from 'react-click-outside';
 
 import {InputSet} from 'components/Shared';
@@ -24,10 +23,6 @@ const Name = styled.div `
 
 class Title extends Component {
     static propTypes = {
-        list: ImmutablePropTypes.mapContains({
-            id: PropTypes.number,
-            title: PropTypes.string
-        }),
         onUpdate: PropTypes.func
     }
 
@@ -59,18 +54,21 @@ class Title extends Component {
     }
     
     render() {
-        const { focused, title } = this.state;
-        const { handleChange, handleFocus } = this;
+        const {focused, title} = this.state;
+        const {handleChange, handleFocus} = this;
         return (focused
-            ? <Wrapper>
+            ? (
+                <Wrapper>
                     <InputSet modify onChange={handleChange} title={title}/>
                 </Wrapper>
-            : <Wrapper onClick={handleFocus}>
-                <Name>
-                    {this.props.list.toJS().title}
-                </Name>
-            </Wrapper>
-        )
+            )
+            : (
+                <Wrapper onClick={handleFocus}>
+                    <Name>
+                        {title}
+                    </Name>
+                </Wrapper>
+            ))
     }
 }
 
