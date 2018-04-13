@@ -22,7 +22,6 @@ Lists.propTypes = {
     lists: ImmutablePropTypes.listOf(ImmutablePropTypes.mapContains({id: PropTypes.number, title: PropTypes.string})),
     onDelete: PropTypes.func,
     onUpdate: PropTypes.func
-
 }
 
 export default Lists;
