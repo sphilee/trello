@@ -15,6 +15,7 @@ class App extends Component {
     constructor(props) {
         super(props);
         this._scrollBarRef = React.createRef();
+        this._scrollRef = React.createRef();
     }
 
     state = {
@@ -33,14 +34,16 @@ class App extends Component {
         const {listSize} = this.props;
         const scrollbar = this._scrollBarRef.current;
         scrollbar.updateScroll();
-        scrollbar._container.scrollLeft = this.state.listWidth * listSize;
+        this._scrollRef.scrollLeft = this.state.listWidth * listSize;
       }
 
     render() {
         return (
             <Layout>
                 <Header/>
-                <PerfectScrollbar ref={this._scrollBarRef}>
+                <PerfectScrollbar
+                    containerRef={container => this._scrollRef = container}
+                    ref={this._scrollBarRef}>
                     <Layout.Main>
                         <ListContainer/>
                         <WriteList updateScroll={this.updateScroll}/>
