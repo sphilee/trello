@@ -26,15 +26,19 @@ const ModifyInput = Input.extend `
 `;
 
 class InputSet extends Component {
-
     static propTypes = {
         onChange: PropTypes.func,
         title: PropTypes.string
     }
+    
+    constructor(props) {
+        super(props);
+        this.titleRef = React.createRef();
+    }
 
     componentDidMount() {
-        this.title.focus();
-        this.title.select();
+        this.titleRef.current.focus();
+        this.titleRef.current.select();
     }
 
     render() {
@@ -44,13 +48,13 @@ class InputSet extends Component {
             ? <ModifyInput
                     name="title"
                     onChange={onChange}
-                    innerRef={ref => this.title = ref}
+                    innerRef={this.titleRef}
                     value={title}/>
             : <AddInput
                 name="title"
                 onChange={onChange}
                 placeholder="Add a list..."
-                innerRef={ref => this.title = ref}
+                innerRef={this.titleRef}
                 value={title}/>);
     }
 }

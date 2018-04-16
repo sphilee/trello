@@ -29,8 +29,6 @@ class App extends Component {
     }
 
     updateScroll = () => {
-        // Explicitly focus the text input using the raw DOM API
-        // Note: we're accessing "current" to get the DOM node
         const {listSize} = this.props;
         const scrollbar = this._scrollBarRef.current;
         scrollbar.updateScroll();
