@@ -7,16 +7,13 @@ const Wrapper = styled.div `
     align-items: center;
     justify-content: center;
     height: 40px;
-    width: 100%;
 `;
 
 const Logo = styled.a `
     display: flex;
-    height: 30px;
     opacity: .5;
+    height: 30px;
     width: 80px;
-    transition: .1s ease;
-    z-index: 2;
 
     &:hover {
         cursor: pointer;

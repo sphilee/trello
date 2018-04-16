@@ -19,7 +19,6 @@ Layout.Main = styled.div`
     display: flex;
     margin-top: 2rem;
     width: 1200px;
-    transition: all .3s;
 `
 
 export default Layout;
