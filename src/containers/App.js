@@ -27,7 +27,7 @@ class App extends Component {
         await ListActions.getInitialList();
     }
 
-    updateScroll() {
+    updateScroll = () => {
         // Explicitly focus the text input using the raw DOM API
         // Note: we're accessing "current" to get the DOM node
         const {listSize} = this.props;
@@ -43,7 +43,7 @@ class App extends Component {
                 <PerfectScrollbar ref={this._scrollBarRef}>
                     <Layout.Main>
                         <ListContainer/>
-                        <WriteList updateScroll={this.updateScroll.bind(this)}/>
+                        <WriteList updateScroll={this.updateScroll}/>
                     </Layout.Main>
                 </PerfectScrollbar>
             </Layout>

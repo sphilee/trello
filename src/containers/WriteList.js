@@ -25,7 +25,7 @@ class WriteList extends Component {
         focused && UIActions.blurInput();
     }
 
-    handleCancel() {
+    handleCancel = () => {
         const {UIActions, focused} = this.props;
 
         focused && UIActions.blurInput();
@@ -54,7 +54,7 @@ class WriteList extends Component {
             ? (
                 <WhiteBox>
                     <InputSet onChange={handleChange} title={title}/>
-                    <ControlSet onCreate={handleCreate} onCancel={handleCancel.bind(this)}/>
+                    <ControlSet onCreate={handleCreate} onCancel={handleCancel}/>
                 </WhiteBox>
             )
             : (
