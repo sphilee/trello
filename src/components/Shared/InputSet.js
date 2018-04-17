@@ -25,10 +25,22 @@ const ModifyInput = Input.extend `
     background: hsla(0,0%,100%,.85);
 `;
 
+const CardInput = styled.textarea `
+    overflow: hidden;
+    font: 14px Helvetica Neue,Arial,Helvetica,sans-serif;
+    word-wrap: break-word;
+    resize: none;
+    border-radius: 3px;
+    margin-bottom: 6px;
+    border: none;
+    height: 54px;
+`;
+
 class InputSet extends Component {
     static propTypes = {
         onChange: PropTypes.func,
-        title: PropTypes.string
+        title: PropTypes.string,
+        type: PropTypes.oneOf(['card', 'modify', 'add'])
     }
     
     constructor(props) {
@@ -41,21 +53,36 @@ class InputSet extends Component {
         this.titleRef.current.select();
     }
 
-    render() {
-        const {modify, onChange, title} = this.props;
-
-        return (modify
-            ? <ModifyInput
+    getBlockComponent() {
+        const {type, onChange, title} = this.props;
+        switch (type) {
+            case 'card':
+                return <CardInput
                     name="title"
                     onChange={onChange}
                     innerRef={this.titleRef}
                     value={title}/>
-            : <AddInput
-                name="title"
-                onChange={onChange}
-                placeholder="Add a list..."
-                innerRef={this.titleRef}
-                value={title}/>);
+
+            case 'modify':
+                return <ModifyInput
+                    name="title"
+                    onChange={onChange}
+                    innerRef={this.titleRef}
+                    value={title}/>
+
+            case 'add':
+                return <AddInput
+                    name="title"
+                    onChange={onChange}
+                    innerRef={this.titleRef}
+                    value={title}/>
+            default:
+                return <div className='no_type'/>
+        }
+    }
+
+    render() {
+        return this.getBlockComponent();
     }
 }
 

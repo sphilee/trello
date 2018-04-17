@@ -3,32 +3,21 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import enhanceWithClickOutside from 'react-click-outside';
 
+import {CardPlaceholder, ControlSet} from 'components/Card';
 import {InputSet} from 'components/Shared';
 
 const Wrapper = styled.div `
     display: flex;
     height: 100%;
     width: 100%;
-    align-items: center;
+    padding : ${props => props.onClick ? "" : "8px"}
+    flex-direction: column;
 `;
 
-const Name = styled.div `
-    height: 24.8px;
-    line-height: 1.2em;
-    border: 1px solid transparent;
-    font-weight: 700;
-    margin: -3px -5px;
-    padding: 3px 5px;
-`;
-
-class Title extends Component {
+class WriteCard extends Component {
     static propTypes = {
+        id : PropTypes.number,
         onUpdate: PropTypes.func
-    }
-
-    componentDidMount() {
-        const { title } = this.props.list.toJS();
-        this.setState({title});
     }
 
     state = {
@@ -45,35 +34,41 @@ class Title extends Component {
         this.setState({title : value});
     }
 
+    handleCancel = () => {
+        this.setState({focused : false});
+    }
+
     handleClickOutside() {
-        const { focused, title } = this.state;
-
+        const { focused } = this.state;
         if(!focused) return;
+        this.setState({focused : false});
+    }
 
+    handleCreate = () => {
         const { id } = this.props.list.toJS();
         const { onUpdate } = this.props;
+        const { title } = this.state;
         onUpdate({id, list: { title }});
         this.setState({focused : false});
     }
     
     render() {
         const {focused, title} = this.state;
-        const {handleChange, handleFocus} = this;
+        const {handleChange, handleFocus, handleCancel, handleCreate} = this;
         return (focused
             ? (
                 <Wrapper>
-                    <InputSet type='modify' onChange={handleChange} title={title}/>
+                    <InputSet type='card' onChange={handleChange} title={title}/>
+                    <ControlSet onCreate={handleCreate} onCancel={handleCancel}/>
                 </Wrapper>
             )
             : (
                 <Wrapper onClick={handleFocus}>
-                    <Name>
-                        {title}
-                    </Name>
+                    <CardPlaceholder/>
                 </Wrapper>
             ))
     }
 }
 
 
-export default enhanceWithClickOutside(Title);
+export default enhanceWithClickOutside(WriteCard);

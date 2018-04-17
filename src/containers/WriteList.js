@@ -53,7 +53,7 @@ class WriteList extends Component {
         return (focused
             ? (
                 <WhiteBox>
-                    <InputSet onChange={handleChange} title={title}/>
+                    <InputSet type='add' onChange={handleChange} title={title}/>
                     <ControlSet onCreate={handleCreate} onCancel={handleCancel}/>
                 </WhiteBox>
             )

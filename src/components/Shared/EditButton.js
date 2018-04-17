@@ -23,14 +23,14 @@ const Button = styled.div `
     }
 `;
 
-const SaveButton = ({onCreate}) => (
+const EditButton = ({onCreate,value}) => (
     <Button onClick={onCreate}>
-        Save
+        {value}
     </Button>
 );
 
-SaveButton.propTypes = {
+EditButton.propTypes = {
     onCreate: PropTypes.func
 }
 
-export default SaveButton;
+export default EditButton;

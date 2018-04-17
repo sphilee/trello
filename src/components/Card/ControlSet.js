@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {EditButton, CancelButton} from './';
+import {EditButton, CancelButton, Option} from 'components/Shared';
 
 const Wrapper = styled.div `
     height : 32px;
@@ -11,8 +11,9 @@ const Wrapper = styled.div `
 
 const ControlSet = ({onCreate, onCancel}) => (
     <Wrapper>
-        <EditButton onCreate={onCreate} value='Save'/>
+        <EditButton onCreate={onCreate} value='Add'/>
         <CancelButton onCancel={onCancel}/>
+        <Option size='big'/>
     </Wrapper>
 );
 
