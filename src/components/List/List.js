@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import {Option, Title} from 'components/Shared';
-import {WriteCard} from 'components/Card';
-
+import WriteCard from 'containers/WriteCard';
 const Wrapper = styled.div`
     width: 270px;
     margin: 0 5px;
@@ -44,7 +43,7 @@ class List extends Component {
                     <Title list={list} onUpdate={onUpdate}/>
                     <Option handleDelete={handleDelete}/>
                 </Header>
-                <WriteCard id={list.toJS().id} onUpdate={onUpdate}/>
+                <WriteCard id={list.toJS().id}/>
             </Wrapper> 
         )
     }

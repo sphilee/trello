@@ -30,9 +30,9 @@ const CardInput = styled.textarea `
     font: 14px Helvetica Neue,Arial,Helvetica,sans-serif;
     word-wrap: break-word;
     resize: none;
+    border: none;
     border-radius: 3px;
     margin-bottom: 6px;
-    border: none;
     height: 54px;
 `;
 
@@ -75,6 +75,7 @@ class InputSet extends Component {
                     name="title"
                     onChange={onChange}
                     innerRef={this.titleRef}
+                    placeholder="Add a list..."
                     value={title}/>
             default:
                 return <div className='no_type'/>

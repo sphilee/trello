@@ -31,7 +31,7 @@ export default function * root() {
     takeEvery(actions.CREATE_LIST, createList),
     takeEvery(actions.GET_INITIAL_LIST, initialList),
     takeEvery(actions.GET_RECENT_LIST, recentList),
-    takeEvery(actions.UPDATE_LIST, updateList),
-    takeEvery(actions.DELETE_LIST, deleteList)
+    takeEvery(actions.GET_UPDATE_LIST, updateList),
+    takeEvery(actions.GET_DELETE_LIST, deleteList)
   ]);
 }

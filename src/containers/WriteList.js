@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {InputPlaceholder, WhiteBox} from 'components/WriteList';
-import {InputSet, ControlSet} from 'components/Shared';
+import {InputPlaceholder, WhiteBox, ControlSet} from 'components/WriteList';
+import {InputSet} from 'components/Shared';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import enhanceWithClickOutside from 'react-click-outside';
