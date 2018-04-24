@@ -3,10 +3,13 @@ import enhanceWithClickOutside from 'react-click-outside';
 
 import {InputPlaceholder, WhiteBox, ControlSet} from 'components/WriteCard';
 import {InputSet} from 'components/Shared';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as cardActions from 'modules/card';
 
 class WriteCard extends Component {
     state = {
-        card: '',
+        title: '',
         focused : false
     };
 
@@ -16,7 +19,7 @@ class WriteCard extends Component {
 
     handleChange = (e) => {
         const { value } = e.target;
-        this.setState({card : value});
+        this.setState({title : value});
     }
 
     handleCancel = () => {
@@ -29,20 +32,21 @@ class WriteCard extends Component {
         this.setState({focused : false});
     }
 
-    handleCreate = () => {
-        const { onUpdate, id } = this.props;
-        const { card } = this.state;
-        onUpdate({id, list: { card }});
-        this.setState({card: '', focused : false});
+    handleCreate = async() => {
+        const {listId, cursor, cardActions} = this.props;
+        const { title } = this.state;
+        await cardActions.createCard({listId, title});
+        await cardActions.getRecentCard({listId, cursor : cursor ? cursor.get('id') : 0});
+        this.setState({title: '', focused : false});
     }
     
     render() {
-        const {focused, card} = this.state;
+        const {focused, title} = this.state;
         const {handleChange, handleFocus, handleCancel, handleCreate} = this;
         return (focused
             ? (
                 <WhiteBox>
-                    <InputSet type='card' onChange={handleChange} title={card}/>
+                    <InputSet type='card' onChange={handleChange} title={title}/>
                     <ControlSet onCreate={handleCreate} onCancel={handleCancel}/>
                 </WhiteBox>
             )
@@ -55,4 +59,8 @@ class WriteCard extends Component {
 }
 
 
-export default enhanceWithClickOutside(WriteCard);
+export default connect((state, ownProps) => ({
+    cursor: state.card.get('data').findLast(card => card.get('listId') === ownProps.listId)
+}), (dispatch) => ({
+    cardActions: bindActionCreators(cardActions, dispatch)
+}))(enhanceWithClickOutside(WriteCard));

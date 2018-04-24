@@ -6,7 +6,6 @@ export const GET_INITIAL_LIST = 'list/GET_INITIAL_LIST';
 export const GET_RECENT_LIST = 'list/GET_RECENT_LIST';
 export const GET_UPDATE_LIST = 'list/GET_UPDATE_LIST';
 export const GET_DELETE_LIST = 'list/GET_DELETE_LIST';
-export const GET_PREVIOUS_LIST = 'list/GET_PREVIOUS_LIST';
 
 export const SET_INITIAL_LIST = 'list/SET_INITIAL_LIST';
 export const SET_RECENT_LIST = 'list/SET_RECENT_LIST';

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import {Option, Title} from 'components/Shared';
 import WriteCard from 'containers/WriteCard';
+import CardContainer from 'containers/CardContainer';
 const Wrapper = styled.div`
     width: 270px;
     margin: 0 5px;
@@ -37,13 +38,15 @@ class List extends Component {
     render() {
         const { list, onUpdate } = this.props;
         const { handleDelete } = this;
+        const { id } = list.toJS();
         return (
             <Wrapper> 
                 <Header>
                     <Title list={list} onUpdate={onUpdate}/>
                     <Option handleDelete={handleDelete}/>
                 </Header>
-                <WriteCard id={list.toJS().id}/>
+                <CardContainer listId={id}/>
+                <WriteCard listId={id}/>
             </Wrapper> 
         )
     }

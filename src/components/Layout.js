@@ -17,6 +17,7 @@ const Layout = ({children}) => (
 
 Layout.Main = styled.div`
     display: flex;
+    align-items: flex-start;
     margin-top: 2rem;
     width: 1200px;
 `

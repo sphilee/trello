@@ -5,6 +5,7 @@ import WriteList from './WriteList';
 import ListContainer from './ListContainer';
 
 import * as listActions from 'modules/list';
+import * as cardActions from 'modules/card';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -23,9 +24,10 @@ class App extends Component {
     }
 
     async componentDidMount() {
-        const {ListActions} = this.props;
+        const {ListActions, CardActions} = this.props;
 
         await ListActions.getInitialList();
+        await CardActions.getInitialCard();
     }
 
     updateScroll = () => {
@@ -55,5 +57,6 @@ class App extends Component {
 export default connect((state) => ({
     listSize: state.list.get('data').size - 1
 }),(dispatch) => ({
-    ListActions: bindActionCreators(listActions, dispatch)
+    ListActions: bindActionCreators(listActions, dispatch),
+    CardActions: bindActionCreators(cardActions, dispatch)
 }))(App);
