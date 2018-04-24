@@ -47,7 +47,7 @@ class List extends Component {
         const { isHovered } = this.state;
         const { handleHover, handleDelete } = this;
         return (
-            <Wrapper onMouseEnter={handleHover} onMouseLeave={handleHover}>
+            <Wrapper onMouseOver={handleHover} onMouseOut={handleHover}>
                 <Title card={card} onUpdate={onUpdate}/>
                 <Edit isHovered={isHovered} handleDelete={handleDelete}/>
             </Wrapper> 
