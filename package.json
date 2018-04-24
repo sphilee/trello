@@ -10,10 +10,8 @@
     "react": "^16.3.1",
     "react-click-outside": "^3.0.1",
     "react-dom": "^16.3.1",
-    "react-icons": "^2.2.7",
-    "react-immutable-proptypes": "^2.1.0",
+    "react-perfect-scrollbar": "^1.1.0",
     "react-redux": "^5.0.7",
-    "react-textarea-autosize": "^6.1.0",
     "react-transition-group": "^2.3.0",
     "redux": "^3.7.2",
     "redux-actions": "^2.3.0",
@@ -29,8 +27,7 @@
     "start:dev": "cross-env NODE_PATH=src react-scripts start",
     "build": "cross-env NODE_PATH=src react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "cross-env NODE_PATH=src npm run build"
+    "eject": "react-scripts eject"
   },
   "proxy": "http://localhost:3001"
 }

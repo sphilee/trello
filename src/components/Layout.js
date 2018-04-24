@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { media } from 'lib/style-utils';
+import background from 'imgs/background.jpg';
 
 const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    background-image: url(${background});
+    background-size: cover;
 `;
 
 const Layout = ({children}) => (
@@ -13,26 +17,9 @@ const Layout = ({children}) => (
 
 Layout.Main = styled.div`
     display: flex;
-    margin: 0 auto;
+    align-items: flex-start;
     margin-top: 2rem;
     width: 1200px;
-    transition: all .3s;
-    position: relative;
-
-    ${media.desktop`
-        width: 990px;
-    `}
-
-    ${media.tablet`
-        margin-top: 1rem;
-        width: calc(100% - 2rem);
-    `}
-
-    ${media.mobile`
-        margin-top: 0.5rem;
-        width: calc(100% - 1rem);        
-    `}
-
 `
 
 export default Layout;

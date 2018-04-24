@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {InputPlaceholder, WhiteBox} from 'components/WriteList';
-import {InputSet, ControlSet} from 'components/Shared';
+import {InputPlaceholder, WhiteBox, ControlSet} from 'components/WriteList';
+import {InputSet} from 'components/Shared';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import enhanceWithClickOutside from 'react-click-outside';
@@ -8,6 +8,11 @@ import * as uiActions from 'modules/ui';
 import * as listActions from 'modules/list';
 
 class WriteList extends Component {
+    componentDidUpdate() {
+        const {updateScroll} = this.props;
+        updateScroll();
+    }
+
     handleFocus = () => {
         const {focused, UIActions} = this.props;
 
@@ -20,7 +25,7 @@ class WriteList extends Component {
         focused && UIActions.blurInput();
     }
 
-    handleCancel() {
+    handleCancel = () => {
         const {UIActions, focused} = this.props;
 
         focused && UIActions.blurInput();
@@ -48,8 +53,8 @@ class WriteList extends Component {
         return (focused
             ? (
                 <WhiteBox>
-                    <InputSet onChange={handleChange} title={title}/>
-                    <ControlSet onCreate={handleCreate} onCancel={handleCancel.bind(this)}/>
+                    <InputSet type='add' onChange={handleChange} title={title}/>
+                    <ControlSet onCreate={handleCreate} onCancel={handleCancel}/>
                 </WhiteBox>
             )
             : (

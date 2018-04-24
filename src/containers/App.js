@@ -5,30 +5,58 @@ import WriteList from './WriteList';
 import ListContainer from './ListContainer';
 
 import * as listActions from 'modules/list';
+import * as cardActions from 'modules/card';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
+import PerfectScrollbar from 'react-perfect-scrollbar';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+
 class App extends Component {
-    async componentDidMount() {
-        const { ListActions } = this.props;
-        
-        await ListActions.getInitialList();
+    constructor(props) {
+        super(props);
+        this._scrollBarRef = React.createRef();
+        this._scrollRef = React.createRef();
     }
 
+    state = {
+        listWidth : 270
+    }
+
+    async componentDidMount() {
+        const {ListActions, CardActions} = this.props;
+
+        await ListActions.getInitialList();
+        await CardActions.getInitialCard();
+    }
+
+    updateScroll = () => {
+        const {listSize} = this.props;
+        const scrollbar = this._scrollBarRef.current;
+        scrollbar.updateScroll();
+        this._scrollRef.scrollLeft = this.state.listWidth * listSize;
+      }
 
     render() {
         return (
             <Layout>
                 <Header/>
-                <Layout.Main>
-                    <ListContainer/>
-                    <WriteList/>
-                </Layout.Main>
+                <PerfectScrollbar
+                    containerRef={container => this._scrollRef = container}
+                    ref={this._scrollBarRef}>
+                    <Layout.Main>
+                        <ListContainer/>
+                        <WriteList updateScroll={this.updateScroll}/>
+                    </Layout.Main>
+                </PerfectScrollbar>
             </Layout>
         );
     }
 }
 
-export default connect((state) => ({}), (dispatch) => ({
-    ListActions: bindActionCreators(listActions, dispatch)
+export default connect((state) => ({
+    listSize: state.list.get('data').size - 1
+}),(dispatch) => ({
+    ListActions: bindActionCreators(listActions, dispatch),
+    CardActions: bindActionCreators(cardActions, dispatch)
 }))(App);
