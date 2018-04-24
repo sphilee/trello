@@ -39,6 +39,7 @@ function * updateList({payload}) {
 function * deleteList({payload}) {
   yield call(WebAPI.deleteList, payload);
   yield put({type: listActions.SET_DELETE_LIST, id: payload});
+  yield put({type: cardActions.SET_DELETE_CARDS, id: payload});
 }
 
 function * deleteCard({payload}) {

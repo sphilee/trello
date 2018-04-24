@@ -11,6 +11,7 @@ export const SET_INITIAL_CARD = 'card/SET_INITIAL_CARD';
 export const SET_RECENT_CARD = 'card/SET_RECENT_CARD';
 export const SET_UPDATE_CARD = 'card/SET_UPDATE_CARD';
 export const SET_DELETE_CARD = 'card/SET_DELETE_CARD';
+export const SET_DELETE_CARDS = 'card/SET_DELETE_CARDS';
 
 export const createCard = createAction(CREATE_CARD); 
 export const getInitialCard = createAction(GET_INITIAL_CARD);
@@ -29,5 +30,9 @@ export default handleActions({
     [SET_DELETE_CARD]: (state, {id}) => {
         const index = state.get('data').findIndex(card => card.get('id') === id);
         return state.deleteIn(['data', index]);
+    },
+    [SET_DELETE_CARDS]: (state, {id}) => {
+        const filtered = state.get('data').filterNot(card => card.get('listId') === id);
+        return state.set('data', filtered);
     }
 }, initialState);
