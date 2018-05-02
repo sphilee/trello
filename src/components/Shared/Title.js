@@ -46,6 +46,10 @@ class Title extends Component {
     }
 
     handleClickOutside() {
+        this.setTitle();
+    }
+
+    setTitle() {
         const { focused, title } = this.state;
 
         if(!focused) return;
@@ -55,14 +59,18 @@ class Title extends Component {
         onUpdate({id, list: { title }});
         this.setState({focused : false});
     }
+
+    handleKeyPress = (e) => {
+        e.key === 'Enter' && this.setTitle();
+    }
     
     render() {
         const {focused, title} = this.state;
-        const {handleChange, handleFocus} = this;
+        const {handleChange, handleFocus, handleKeyPress} = this;
         return (focused
             ? (
                 <Wrapper>
-                    <InputSet type='modify' onChange={handleChange} title={title}/>
+                    <InputSet type='modify' onChange={handleChange} onKeyPress={handleKeyPress} title={title}/>
                 </Wrapper>
             )
             : (

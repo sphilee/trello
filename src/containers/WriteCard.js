@@ -32,6 +32,10 @@ class WriteCard extends Component {
         this.setState({focused : false});
     }
 
+    handleKeyPress = (e) => {
+        e.key === 'Enter' && this.handleCreate();
+    }
+
     handleCreate = async() => {
         const {listId, cursor, cardActions} = this.props;
         const { title } = this.state;
@@ -42,11 +46,11 @@ class WriteCard extends Component {
     
     render() {
         const {focused, title} = this.state;
-        const {handleChange, handleFocus, handleCancel, handleCreate} = this;
+        const {handleChange, handleFocus, handleCancel, handleCreate, handleKeyPress} = this;
         return (focused
             ? (
                 <WhiteBox>
-                    <InputSet type='card' onChange={handleChange} title={title}/>
+                    <InputSet type='card' onChange={handleChange} onKeyPress={handleKeyPress} title={title}/>
                     <ControlSet onCreate={handleCreate} onCancel={handleCancel}/>
                 </WhiteBox>
             )

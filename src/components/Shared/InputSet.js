@@ -54,12 +54,13 @@ class InputSet extends Component {
     }
 
     getBlockComponent() {
-        const {type, onChange, title} = this.props;
+        const {type, onChange, onKeyPress, title} = this.props;
         switch (type) {
             case 'card':
                 return <CardInput
                     name="title"
                     onChange={onChange}
+                    onKeyPress={onKeyPress}
                     innerRef={this.titleRef}
                     value={title}/>
 
@@ -67,6 +68,7 @@ class InputSet extends Component {
                 return <ModifyInput
                     name="title"
                     onChange={onChange}
+                    onKeyPress={onKeyPress}
                     innerRef={this.titleRef}
                     value={title}/>
 
@@ -74,6 +76,7 @@ class InputSet extends Component {
                 return <AddInput
                     name="title"
                     onChange={onChange}
+                    onKeyPress={onKeyPress}
                     innerRef={this.titleRef}
                     placeholder="Add a list..."
                     value={title}/>
