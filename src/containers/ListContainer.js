@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as listActions from 'modules/list';
-import Lists from 'components/List';
+import {Lists} from 'components/List';
 
 class ListContainer extends Component {
     render() {

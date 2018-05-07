@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const EditIcon = styled.div `
+const Edit = styled.div `
     visibility : ${props => props.hovered ? 'visible' : 'hidden'};
     display: flex;
     align-items: center;
@@ -25,10 +25,10 @@ const EditIcon = styled.div `
 
 `;
 
-const Edit = ({hovered, onClick}) => (<EditIcon hovered={hovered} onClick={onClick}/>);
+const EditButton = ({hovered, onClick}) => (<Edit hovered={hovered} onClick={onClick}/>);
 
-Edit.propTypes = {
+EditButton.propTypes = {
     onClick: PropTypes.func
 }
 
-export default Edit;
+export default EditButton;

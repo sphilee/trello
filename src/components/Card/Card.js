@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import {DeleteButton, InputSet} from 'components/Shared';
-import {Title, Edit} from 'components/Card';
+import {Title, EditButton} from 'components/Card';
 
 const Wrapper = styled.a `
     background-color: #fff;
@@ -36,7 +36,7 @@ class Card extends Component {
         title: '',
         id: null,
         hovered: false,
-        focused: false
+        edited: false
     }
 
     handleDelete = () => {
@@ -51,9 +51,9 @@ class Card extends Component {
         });
     }
 
-    handleFocus = () => {
+    handleEdit = () => {
         this.setState({
-            focused: !this.state.focused
+            edited: !this.state.edited
         });
     }
 
@@ -65,22 +65,22 @@ class Card extends Component {
     setTitle = () => {
         const { title, id } = this.state;
         const { onUpdate } = this.props;
-        const { handleHover, handleFocus } = this;
+        const { handleHover, handleEdit } = this;
         onUpdate({id, list: { title }});
         handleHover();
-        handleFocus();
+        handleEdit();
     }
 
     render() {
-        const {title, hovered, focused} = this.state;
-        const {handleHover, handleFocus, handleDelete, handleChange, setTitle} = this;
-        return (focused
+        const {title, hovered, edited} = this.state;
+        const {handleHover, handleEdit, handleDelete, handleChange, setTitle} = this;
+        return (edited
             ? <Wrapper>
                     <InputSet type='modify' setTitle={setTitle} onChange={handleChange} title={title}/>
                 </Wrapper>
             : <Wrapper onMouseOver={handleHover} onMouseOut={handleHover}>
                 <Title title={title}/>
-                <Edit hovered={hovered} onClick={handleFocus}/>
+                <EditButton hovered={hovered} onClick={handleEdit}/>
                 <DeleteButton hovered={hovered} handleDelete={handleDelete}/>
             </Wrapper>)
     }

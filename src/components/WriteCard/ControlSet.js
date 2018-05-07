@@ -13,7 +13,7 @@ const ControlSet = ({onCreate, onCancel}) => (
     <Wrapper>
         <EditButton onCreate={onCreate} value='Add'/>
         <CancelButton onCancel={onCancel}/>
-        <MenuButton size='big'/>
+        <MenuButton/>
     </Wrapper>
 );
 
