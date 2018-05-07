@@ -43,7 +43,7 @@ class List extends Component {
             <Wrapper> 
                 <Header>
                     <Title list={list} onUpdate={onUpdate}/>
-                    <DeleteButton isHovered handleDelete={handleDelete}/>
+                    <DeleteButton hovered handleDelete={handleDelete}/>
                 </Header>
                 <CardContainer listId={id}/>
                 <WriteCard listId={id}/>

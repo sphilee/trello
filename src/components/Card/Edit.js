@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const EditIcon = styled.div `
-    visibility : ${props => props.isHovered ? 'visible' : 'hidden'};
+    visibility : ${props => props.hovered ? 'visible' : 'hidden'};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,10 +25,10 @@ const EditIcon = styled.div `
 
 `;
 
-const Edit = ({isHovered, handleDelete}) => (<EditIcon isHovered={isHovered} onClick={handleDelete}/>);
+const Edit = ({hovered, onClick}) => (<EditIcon hovered={hovered} onClick={onClick}/>);
 
 Edit.propTypes = {
-    handleDelete: PropTypes.func
+    onClick: PropTypes.func
 }
 
 export default Edit;

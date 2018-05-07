@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import enhanceWithClickOutside from 'react-click-outside';
 
 import {InputSet} from 'components/Shared';
 
@@ -27,12 +26,13 @@ class Title extends Component {
     }
 
     componentDidMount() {
-        const { title } = this.props.list.toJS();
-        this.setState({title});
+        const { title, id } = this.props.list.toJS();
+        this.setState({title, id});
     }
 
     state = {
         title: '',
+        id: null,
         focused : false
     };
 
@@ -45,32 +45,20 @@ class Title extends Component {
         this.setState({title : value});
     }
 
-    handleClickOutside() {
-        this.setTitle();
-    }
-
-    setTitle() {
-        const { focused, title } = this.state;
-
-        if(!focused) return;
-
-        const { id } = this.props.list.toJS();
+    setTitle = () => {
+        const { title, id } = this.state;
         const { onUpdate } = this.props;
         onUpdate({id, list: { title }});
         this.setState({focused : false});
     }
 
-    handleKeyPress = (e) => {
-        e.key === 'Enter' && this.setTitle();
-    }
-    
     render() {
         const {focused, title} = this.state;
-        const {handleChange, handleFocus, handleKeyPress} = this;
+        const {handleChange, handleFocus, setTitle} = this;
         return (focused
             ? (
                 <Wrapper>
-                    <InputSet type='modify' onChange={handleChange} onKeyPress={handleKeyPress} title={title}/>
+                    <InputSet type='modify' setTitle={setTitle} onChange={handleChange} title={title}/>
                 </Wrapper>
             )
             : (
@@ -84,4 +72,4 @@ class Title extends Component {
 }
 
 
-export default enhanceWithClickOutside(Title);
+export default Title;

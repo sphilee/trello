@@ -7,7 +7,7 @@ import {Cards} from 'components/Card';
 class CardContainer extends Component {
     render() {
         const {cards, CardActions} = this.props;
-        return (<Cards cards={cards} onDelete={CardActions.deleteCard}/>);
+        return (<Cards cards={cards} onUpdate={CardActions.updateCard} onDelete={CardActions.deleteCard}/>);
     }
 }
 

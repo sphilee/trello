@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import enhanceWithClickOutside from 'react-click-outside';
 
 const Input = styled.input `
     width: 100%;
@@ -53,14 +54,25 @@ class InputSet extends Component {
         this.titleRef.current.select();
     }
 
+    handleKeyPress = (e) => {
+        const {setTitle} = this.props;
+        e.key === 'Enter' && setTitle();
+    }
+
+    handleClickOutside() {
+        const {setTitle} = this.props;
+        setTitle && setTitle();
+    }
+
     getBlockComponent() {
-        const {type, onChange, onKeyPress, title} = this.props;
+        const {type, onChange, title} = this.props;
+        const {handleKeyPress} = this;
         switch (type) {
             case 'card':
                 return <CardInput
                     name="title"
                     onChange={onChange}
-                    onKeyPress={onKeyPress}
+                    onKeyPress={handleKeyPress}
                     innerRef={this.titleRef}
                     value={title}/>
 
@@ -68,7 +80,7 @@ class InputSet extends Component {
                 return <ModifyInput
                     name="title"
                     onChange={onChange}
-                    onKeyPress={onKeyPress}
+                    onKeyPress={handleKeyPress}
                     innerRef={this.titleRef}
                     value={title}/>
 
@@ -76,7 +88,7 @@ class InputSet extends Component {
                 return <AddInput
                     name="title"
                     onChange={onChange}
-                    onKeyPress={onKeyPress}
+                    onKeyPress={handleKeyPress}
                     innerRef={this.titleRef}
                     placeholder="Add a list..."
                     value={title}/>
@@ -90,4 +102,4 @@ class InputSet extends Component {
     }
 }
 
-export default InputSet;
+export default enhanceWithClickOutside(InputSet);

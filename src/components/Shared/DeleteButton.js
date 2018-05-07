@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Wrapper = styled.div `
-    visibility : ${props => props.isHovered
+    visibility : ${props => props.hovered
     ? 'visible'
     : 'hidden'};
     display: flex;
@@ -78,8 +78,8 @@ const Container = styled.div `
 `;
 
 
-const DeleteButton = ({isHovered, handleDelete}) => (
-    <Wrapper isHovered={isHovered} onClick={handleDelete}>
+const DeleteButton = ({hovered, handleDelete}) => (
+    <Wrapper hovered={hovered} onClick={handleDelete}>
         <Trash >
             <Lid/>
             <Container/>

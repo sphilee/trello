@@ -13,8 +13,8 @@ const Wrapper = styled.div `
     z-index: 1;
 `;
 
-const Cards = ({cards, onDelete}) => {
-    const Cards = cards.map(card => (<Card key={card.get('id')} card={card} onDelete={onDelete}/>));
+const Cards = ({cards, onUpdate, onDelete}) => {
+    const Cards = cards.map(card => (<Card key={card.get('id')} card={card} onUpdate={onUpdate} onDelete={onDelete}/>));
     return (
         <Wrapper>
             {Cards}
