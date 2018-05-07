@@ -46,14 +46,18 @@ class WriteList extends Component {
         UIActions.resetInput();
     }
 
+    handleKeyPress = (e) => {
+        e.key === 'Enter' && this.handleCreate();
+    }
+
     render() {
-        const {handleFocus, handleChange, handleCreate, handleCancel} = this;
+        const {handleFocus, handleChange, handleCreate, handleCancel, handleKeyPress} = this;
         const {focused, title} = this.props;
 
         return (focused
             ? (
                 <WhiteBox>
-                    <InputSet type='add' onChange={handleChange} title={title}/>
+                    <InputSet type='add' onChange={handleChange} onKeyPress={handleKeyPress} title={title}/>
                     <ControlSet onCreate={handleCreate} onCancel={handleCancel}/>
                 </WhiteBox>
             )

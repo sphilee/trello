@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const Wrapper = styled.div `
     width: 100%;
@@ -9,12 +8,9 @@ const Wrapper = styled.div `
 `;
 
 class Title extends Component {
-    static propTypes = {
-        onUpdate: PropTypes.func
-    }
 
     render() {
-        const {title} = this.props.card.toJS();
+        const {title} = this.props;
         return (
             <Wrapper>
                 {title}

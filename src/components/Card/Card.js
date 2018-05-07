@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import {DeleteButton, InputSet} from 'components/Shared';
 import {Title, Edit} from 'components/Card';
 
-const Wrapper = styled.a`
+const Wrapper = styled.a `
     background-color: #fff;
     border-bottom: 1px solid #ccc;
     border-radius: 3px;
@@ -20,40 +21,69 @@ const Wrapper = styled.a`
     }
 `;
 
-class List extends Component {
+class Card extends Component {
     static propTypes = {
         onDelete: PropTypes.func,
         onUpdate: PropTypes.func
     }
 
+    componentDidMount() {
+        const { title, id } = this.props.card.toJS();
+        this.setState({title, id});
+    }
+
     state = {
-        isHovered : false
+        title: '',
+        id: null,
+        hovered: false,
+        focused: false
     }
 
     handleDelete = () => {
-        const { id } = this.props.card.toJS();
-        const { onDelete } = this.props;
+        const {id} = this.state;
+        const {onDelete} = this.props;
         onDelete(id);
     }
 
-    handleHover =() => {
+    handleHover = () => {
         this.setState({
-            isHovered: !this.state.isHovered
+            hovered: !this.state.hovered
         });
     }
 
+    handleFocus = () => {
+        this.setState({
+            focused: !this.state.focused
+        });
+    }
+
+    handleChange = (e) => {
+        const { value } = e.target;
+        this.setState({title : value});
+    }
+
+    setTitle = () => {
+        const { title, id } = this.state;
+        const { onUpdate } = this.props;
+        const { handleHover, handleFocus } = this;
+        onUpdate({id, list: { title }});
+        handleHover();
+        handleFocus();
+    }
+
     render() {
-        const { card, onUpdate } = this.props;
-        const { isHovered } = this.state;
-        const { handleHover, handleDelete } = this;
-        return (
-            <Wrapper onMouseOver={handleHover} onMouseOut={handleHover}>
-                <Title card={card} onUpdate={onUpdate}/>
-                <Edit isHovered={isHovered} handleDelete={handleDelete}/>
-            </Wrapper> 
-        )
+        const {title, hovered, focused} = this.state;
+        const {handleHover, handleFocus, handleDelete, handleChange, setTitle} = this;
+        return (focused
+            ? <Wrapper>
+                    <InputSet type='modify' setTitle={setTitle} onChange={handleChange} title={title}/>
+                </Wrapper>
+            : <Wrapper onMouseOver={handleHover} onMouseOut={handleHover}>
+                <Title title={title}/>
+                <Edit hovered={hovered} onClick={handleFocus}/>
+                <DeleteButton hovered={hovered} handleDelete={handleDelete}/>
+            </Wrapper>)
     }
 }
 
-
-export default List;
+export default Card;

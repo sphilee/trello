@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import {Option, Title} from 'components/Shared';
+import {DeleteButton, Title} from 'components/Shared';
 import WriteCard from 'containers/WriteCard';
 import CardContainer from 'containers/CardContainer';
 const Wrapper = styled.div`
@@ -43,7 +43,7 @@ class List extends Component {
             <Wrapper> 
                 <Header>
                     <Title list={list} onUpdate={onUpdate}/>
-                    <Option handleDelete={handleDelete}/>
+                    <DeleteButton hovered handleDelete={handleDelete}/>
                 </Header>
                 <CardContainer listId={id}/>
                 <WriteCard listId={id}/>
