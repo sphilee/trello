@@ -1,5 +1,5 @@
 import {put, takeEvery, all, call} from 'redux-saga/effects'
-import * as WebAPI from 'lib/web-api';
+import * as WebAPI from 'utils/web-api';
 import * as listActions from 'modules/list';
 import * as cardActions from 'modules/card';
 
