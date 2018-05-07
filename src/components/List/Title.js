@@ -30,6 +30,10 @@ class Title extends Component {
         this.setState({title, id});
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState;
+    }
+
     state = {
         title: '',
         id: null,
@@ -58,7 +62,11 @@ class Title extends Component {
         return (focused
             ? (
                 <Wrapper>
-                    <InputSet type='modify' setTitle={setTitle} onChange={handleChange} title={title}/>
+                    <InputSet
+                        type='modify'
+                        setTitle={setTitle}
+                        onChange={handleChange}
+                        title={title}/>
                 </Wrapper>
             )
             : (

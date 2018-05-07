@@ -82,18 +82,23 @@ class Card extends Component {
         const {title, hovered, edited} = this.state;
         const {handleHover, handleEdit, handleDelete, handleChange, setTitle} = this;
         return (edited
-            ? <Wrapper>
+            ? (
+                <Wrapper>
                     <InputSet
                         type='modify'
+                        subType='card'
                         setTitle={setTitle}
                         onChange={handleChange}
                         title={title}/>
                 </Wrapper>
-            : <Wrapper onMouseOver={handleHover} onMouseOut={handleHover}>
-                <Title>{title}</Title>
-                <EditButton hovered={hovered} onClick={handleEdit}/>
-                <DeleteButton hovered={hovered} handleDelete={handleDelete}/>
-            </Wrapper>)
+            )
+            : (
+                <Wrapper onMouseOver={handleHover} onMouseOut={handleHover}>
+                    <Title>{title}</Title>
+                    <EditButton hovered={hovered} onClick={handleEdit}/>
+                    <DeleteButton hovered={hovered} handleDelete={handleDelete}/>
+                </Wrapper>
+            ))
     }
 }
 
