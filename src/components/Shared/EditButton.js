@@ -23,7 +23,7 @@ const Button = styled.div `
     }
 `;
 
-const EditButton = ({onCreate,value}) => (
+const EditButton = ({onCreate, value}) => (
     <Button onClick={onCreate}>
         {value}
     </Button>

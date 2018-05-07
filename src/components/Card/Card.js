@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
+import {DeleteButton} from 'components/Shared';
 import {Title, Edit} from 'components/Card';
 
 const Wrapper = styled.a`
@@ -50,6 +51,7 @@ class List extends Component {
             <Wrapper onMouseOver={handleHover} onMouseOut={handleHover}>
                 <Title card={card} onUpdate={onUpdate}/>
                 <Edit isHovered={isHovered} handleDelete={handleDelete}/>
+                <DeleteButton isHovered={isHovered} handleDelete={handleDelete}/>
             </Wrapper> 
         )
     }
