@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import {DeleteButton, InputSet} from 'components/Shared';
-import {Title, EditButton} from 'components/Card';
+import {EditButton} from 'components/Card';
 
 const Wrapper = styled.a `
     background-color: #fff;
@@ -13,12 +13,19 @@ const Wrapper = styled.a `
     cursor: pointer;
     display: flex;
     margin-bottom: 6px;
+    height : 35px;
     text-decoration: none;
     
     &:hover {
         background: #edeff0;
         border-bottom-color: #d6dadc;
     }
+`;
+
+const Title = styled.div `
+    width: 100%;
+    margin-bottom: 4px;
+    word-wrap: break-word;
 `;
 
 class Card extends Component {
@@ -76,10 +83,14 @@ class Card extends Component {
         const {handleHover, handleEdit, handleDelete, handleChange, setTitle} = this;
         return (edited
             ? <Wrapper>
-                    <InputSet type='modify' setTitle={setTitle} onChange={handleChange} title={title}/>
+                    <InputSet
+                        type='modify'
+                        setTitle={setTitle}
+                        onChange={handleChange}
+                        title={title}/>
                 </Wrapper>
             : <Wrapper onMouseOver={handleHover} onMouseOut={handleHover}>
-                <Title title={title}/>
+                <Title>{title}</Title>
                 <EditButton hovered={hovered} onClick={handleEdit}/>
                 <DeleteButton hovered={hovered} handleDelete={handleDelete}/>
             </Wrapper>)
