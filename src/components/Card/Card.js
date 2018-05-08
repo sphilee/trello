@@ -25,7 +25,9 @@ const Wrapper = styled.a `
 const Title = styled.div `
     width: 100%;
     margin-bottom: 4px;
-    word-wrap: break-word;
+    overflow : hidden;
+    white-space: nowrap;
+    text-overflow : ellipsis;
 `;
 
 class Card extends Component {

@@ -12,9 +12,13 @@ const Wrapper = styled.div `
 `;
 
 const Name = styled.div `
+    width: 232px;
     height: 24.8px;
     line-height: 1.2em;
     border: 1px solid transparent;
+    overflow : hidden;
+    white-space: nowrap;
+    text-overflow : ellipsis;
     font-weight: 700;
     margin: -3px -5px;
     padding: 3px 5px;
