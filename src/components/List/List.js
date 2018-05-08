@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import {DeleteButton, Title} from 'components/Shared';
+import {DeleteButton} from 'components/Shared';
+import {Title} from 'components/List';
 import WriteCard from 'containers/WriteCard';
 import CardContainer from 'containers/CardContainer';
 const Wrapper = styled.div`
@@ -28,6 +29,14 @@ class List extends Component {
         onDelete: PropTypes.func,
         onUpdate: PropTypes.func
     }
+    componentDidMount(){
+        const {id} = this.props.list.toJS();
+        this.setState({id});
+    }
+
+    state = {
+        id : null
+    }
 
     handleDelete = () => {
         const { id } = this.props.list.toJS();
@@ -36,9 +45,9 @@ class List extends Component {
     }
 
     render() {
-        const { list, onUpdate } = this.props;
         const { handleDelete } = this;
-        const { id } = list.toJS();
+        const { id } = this.state;
+        const { list, onUpdate } = this.props;
         return (
             <Wrapper> 
                 <Header>

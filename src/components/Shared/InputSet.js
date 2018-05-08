@@ -20,7 +20,7 @@ const AddInput = Input.extend `
 const ModifyInput = Input.extend `
     height: 24.8px;
     line-height: 1.2em;
-    font-weight: 700;
+    font-weight: ${props => props.subType === 'card' ? 0 : 700};
     margin: -3px -5px;
     padding: 3px 5px;
     background: hsla(0,0%,100%,.85);
@@ -65,7 +65,7 @@ class InputSet extends Component {
     }
 
     getBlockComponent() {
-        const {type, onChange, title} = this.props;
+        const {type, subType, onChange, title} = this.props;
         const {handleKeyPress} = this;
         switch (type) {
             case 'card':
@@ -79,6 +79,7 @@ class InputSet extends Component {
             case 'modify':
                 return <ModifyInput
                     name="title"
+                    subType={subType}
                     onChange={onChange}
                     onKeyPress={handleKeyPress}
                     innerRef={this.titleRef}
